@@ -1,24 +1,18 @@
-import express from "express"
 import { dbConnect } from "./db/connect.js"
-import { taskRouter } from "./routes/tasks.js"
 import dotenv from 'dotenv'
+import { app } from "./app.js"
 
 dotenv.config({
     path: ".env"
 })
 
-const app = express()
-const PORT = 3000
-
-
-
 dbConnect()
     .then(
-        app.listen(PORT, () => {
-            console.log('Server is running at port', PORT);
+        app.listen(process.env.PORT, () => {
+            console.log('Server is running at port', process.env.PORT);
         })
     )
     .catch((error) => {
-        console.log("Error in connecting with database", error);
+        console.log("Error in connecting with database");
     })
 
